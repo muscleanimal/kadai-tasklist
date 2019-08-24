@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
     before_action :require_user_logged_in, only: [:index, :show]
   def index
-       @users = User.order(id: :desc).page(params[:page]).per(25)
+        @users = User.order(id: :desc).page(params[:page]).per(25)
+      @tasklist = current_user.tasks.build  # form_with 用
+      @tasklists = User.order(id: :desc).page(params[:page]).per(25)
   end
 
   def show
